@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal RH Carmak</title>
+
+  <style>
+    :root {
+      --verde-escuro:  #0a2212;
+      --verde-medio:   #0d3019;
+      --verde-card:    rgba(10, 34, 18, 0.90);
+      --verde-limao:   #5cb800;
+      --verde-borda:   rgba(92, 184, 0, 0.30);
+      --verde-glow:    rgba(92, 184, 0, 0.15);
+      --text-main:     #f0f7ec;
+      --text-muted:    #8aab7a;
+      --shadow:        0 24px 80px rgba(0,0,0,0.55);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text-main);
+      background:
+        radial-gradient(ellipse at top left,  rgba(92,184,0,0.18) 0%, transparent 45%),
+        radial-gradient(ellipse at bottom right, rgba(13,48,25,0.9) 0%, transparent 60%),
+        var(--verde-escuro);
+    }
+
+    /* ── PAGE ── */
+    .page {
+      min-height: 100vh;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── CARDS ── */
+    .login-card, .portal-card {
+      width: 100%;
+      background: var(--verde-card);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--verde-borda);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .login-card {
+      max-width: 460px;
+      padding: 40px 36px;
+      animation: fadeIn .5s ease;
+    }
+
+    .portal-card { max-width: 1160px; }
+
+    /* ── LOGIN BRAND ── */
+    .brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--verde-borda);
+    }
+
+    .brand img {
+      height: 52px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(92,184,0,0.4));
+    }
+
+    .brand-sub {
+      color: var(--text-muted);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── TITLES ── */
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
+
+    /* ── FIELDS ── */
+    .field { margin-bottom: 16px; }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    input {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--verde-borda);
+      background: rgba(255,255,255,0.05);
+      color: var(--text-main);
+      outline: none;
+      font-size: 15px;
+      transition: .2s ease;
+    }
+
+    input::placeholder { color: #3d6040; }
+
+    input:focus {
+      border-color: rgba(92,184,0,.7);
+      box-shadow: 0 0 0 4px rgba(92,184,0,.12);
+    }
+
+    /* ── BUTTON ── */
+    .btn {
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #fff;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #5cb800, #3a7a00);
+      box-shadow: 0 12px 30px rgba(92,184,0,.28);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(92,184,0,.38);
+    }
+
+    /* ── ERRO ── */
+    .erro {
+      min-height: 20px;
+      margin-top: 14px;
+      color: #fca5a5;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .hint {
+      margin-top: 20px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(92,184,0,.07);
+      border: 1px solid var(--verde-borda);
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* ── PORTAL HEADER ── */
+    #areaCliente { display: none; width: 100%; animation: fadeIn .5s ease; }
+
+    .portal-header {
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      border-bottom: 1px solid var(--verde-borda);
+      background: rgba(0,0,0,.18);
+    }
+
+    .header-left { display: flex; align-items: center; gap: 20px; }
+
+    .portal-logo {
+      height: 36px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(92,184,0,.35));
+    }
+
+    .header-divider {
+      width: 1px;
+      height: 32px;
+      background: var(--verde-borda);
+    }
+
+    .portal-title h2 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .portal-title p {
+      margin-top: 3px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .logout-btn {
+      border: 1px solid rgba(239,68,68,.3);
+      background: rgba(239,68,68,.10);
+      color: #fecaca;
+      padding: 10px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: .2s ease;
+    }
+
+    .logout-btn:hover { background: rgba(239,68,68,.2); }
+
+    /* ── PORTAL BODY ── */
+    .portal-body { padding: 28px 32px; }
+
+    .section-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .section-label h3 {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .10em;
+      text-transform: uppercase;
+      color: var(--verde-limao);
+    }
+
+    .section-label span { color: var(--text-muted); font-size: 13px; }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 64px 24px;
+      color: var(--text-muted);
+    }
+
+    .empty-state .empty-icon { font-size: 44px; margin-bottom: 14px; opacity: .5; }
+
+    .empty-state h4 {
+      font-size: 17px;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p { font-size: 14px; line-height: 1.6; }
+
+    /* ── DASHBOARD GRID ── */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .dashboard-card {
+      position: relative;
+      min-height: 136px;
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--verde-borda);
+      background: linear-gradient(135deg, rgba(92,184,0,.09), rgba(10,34,18,.6));
+      cursor: pointer;
+      overflow: hidden;
+      transition: .22s ease;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(92,184,0,.55);
+      box-shadow: 0 16px 40px rgba(0,0,0,.3);
+    }
+
+    .dashboard-card.active {
+      border-color: var(--verde-limao);
+      box-shadow: 0 0 0 3px rgba(92,184,0,.2);
+    }
+
+    .dashboard-card::after {
+      content: "";
+      position: absolute;
+      width: 110px; height: 110px;
+      right: -30px; bottom: -30px;
+      border-radius: 999px;
+      background: rgba(92,184,0,.10);
+    }
+
+    .dashboard-icon {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(92,184,0,.16);
+      font-size: 19px;
+      margin-bottom: 14px;
+    }
+
+    .dashboard-card h4 { font-size: 16px; margin-bottom: 6px; }
+
+    .dashboard-card p {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.45;
+      max-width: 88%;
+    }
+
+    /* ── VIEWER ── */
+    .viewer {
+      display: none;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--verde-borda);
+      background: rgba(0,0,0,.15);
+      animation: fadeIn .4s ease;
+    }
+
+    .viewer-top {
+      padding: 13px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--verde-borda);
+    }
+
+    .viewer-top strong { font-size: 14px; }
+
+    .open-new {
+      color: var(--verde-limao);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    iframe {
+      width: 100%;
+      height: 820px;
+      border: none;
+      display: block;
+      background: white;
+    }
+
+    /* ── BADGE ── */
+    .badge-rh {
+      display: inline-block;
+      background: linear-gradient(135deg, #5cb800, #3a7a00);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 3px 9px;
+      border-radius: 999px;
+      margin-left: 10px;
+      vertical-align: middle;
+      letter-spacing: .05em;
+    }
+
+    /* ── ANIM ── */
+    /* ── FAVORITO ── */
+    .fav-btn {
+      position: absolute;
+      top: 12px; right: 12px;
+      background: none;
+      border: none;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 2;
+      opacity: 0.35;
+      transition: opacity .2s ease, transform .2s ease;
+      line-height: 1;
+    }
+    .fav-btn:hover { opacity: 0.8; transform: scale(1.2); }
+    .fav-btn.ativo { opacity: 1; filter: drop-shadow(0 0 6px rgba(255,200,0,.7)); }
+
+    /* ── BADGE NOVO ── */
+    .badge-novo {
+      display: inline-block;
+      background: linear-gradient(135deg, #5cb800, #3a7a00);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 999px;
+      letter-spacing: .05em;
+      margin-left: 8px;
+      vertical-align: middle;
+      animation: pulseNovo 2s infinite;
+    }
+
+    @keyframes pulseNovo {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(92,184,0,.5); }
+      50%       { box-shadow: 0 0 0 5px rgba(92,184,0,0); }
+    }
+
+    /* ── SEÇÃO FAVORITOS ── */
+    .section-favs {
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--verde-borda);
+    }
+
+    .section-favs-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── PAINEL RH ── */
+    .rh-panel {
+      display: none;
+      margin-bottom: 28px;
+      border-radius: 20px;
+      border: 1px solid rgba(92,184,0,.4);
+      background: linear-gradient(135deg, rgba(92,184,0,.06), rgba(10,34,18,.7));
+      overflow: hidden;
+    }
+
+    .rh-panel-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid rgba(92,184,0,.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .rh-panel-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--verde-limao);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .rh-status {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rh-status .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--verde-limao);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+
+    .rh-panel-body { padding: 20px 24px; }
+
+    .rh-kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .rh-kpi {
+      background: rgba(0,0,0,.25);
+      border: 1px solid var(--verde-borda);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      transition: .2s ease;
+    }
+
+    .rh-kpi:hover {
+      border-color: rgba(92,184,0,.5);
+      transform: translateY(-2px);
+    }
+
+    .rh-kpi .kpi-icon { font-size: 20px; margin-bottom: 8px; }
+
+    .rh-kpi .kpi-valor {
+      font-size: 30px;
+      font-weight: 800;
+      color: var(--verde-limao);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .rh-kpi .kpi-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    .rh-kpi.loading .kpi-valor {
+      font-size: 16px;
+      color: var(--text-muted);
+      animation: blink 1.2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .3; }
+    }
+
+    /* ── GRÁFICO RH ── */
+    .rh-chart-wrap {
+      background: rgba(0,0,0,.2);
+      border: 1px solid var(--verde-borda);
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .rh-chart-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .rh-chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 120px;
+    }
+
+    .rh-bar-group {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .rh-bar {
+      width: 100%;
+      border-radius: 6px 6px 0 0;
+      transition: height .6s ease;
+      min-height: 4px;
+      position: relative;
+    }
+
+    .rh-bar.ativos   { background: linear-gradient(180deg, #5cb800, #3a7a00); }
+    .rh-bar.admitidos { background: linear-gradient(180deg, #38bdf8, #0284c7); }
+    .rh-bar.demitidos { background: linear-gradient(180deg, #fca5a5, #ef4444); }
+
+    .rh-bar-label {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    .rh-bar-val {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .rh-chart-legend {
+      display: flex;
+      gap: 16px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .rh-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .rh-legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 3px;
+    }
+
+    .rh-atualizado {
+      margin-top: 14px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 700px) {
+      .page { padding: 16px; align-items: flex-start; }
+      .login-card { margin-top: 32px; padding: 28px 22px; }
+      .portal-header { flex-direction: column; align-items: stretch; }
+      .header-left { flex-wrap: wrap; }
+      .logout-btn { width: 100%; text-align: center; }
+      iframe { height: 680px; }
+    }
+  </style>
+</head>
+
+<body>
+<main class="page">
+
+  <!-- ── LOGIN ── -->
+  <section class="login-card" id="areaLogin">
+    <div class="brand">
+      <img src="data:image/png;base64,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" alt="Carmak" />
+      <span class="brand-sub">Portal de Supervisores — RH</span>
+    </div>
+
+    <h1>Bem-vindo</h1>
+    <p class="subtitle">Entre com seu login e senha para acessar os relatórios personalizados da sua equipe.</p>
+
+    <div class="field">
+      <label for="login">Login</label>
+      <input type="text" id="login" placeholder="nome+sobrenome" autocomplete="username" />
+    </div>
+
+    <div class="field">
+      <label for="senha">Senha</label>
+      <input type="password" id="senha" placeholder="Digite sua senha" autocomplete="current-password" />
+    </div>
+
+    <button class="btn" onclick="entrar()">Acessar portal</button>
+    <p id="erro" class="erro"></p>
+
+    <div class="hint">💡 O login não diferencia letras maiúsculas ou minúsculas.</div>
+  </section>
+
+  <!-- ── PORTAL ── -->
+  <section class="portal-card" id="areaCliente">
+    <header class="portal-header">
+      <div class="header-left">
+        <img class="portal-logo" src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCABNASkDASIAAhEBAxEB/8QAHQAAAgMBAQEBAQAAAAAAAAAAAAcFBggEAwECCf/EAEkQAAEDAwEEBAkJAwsFAQAAAAECAwQABREGBxIhMRNBUYEUFRYiYXGRobEIIzIzQlJiwdEkkpMXNDZVcnOCg6Lw8SZUVmNksv/EABsBAAEFAQEAAAAAAAAAAAAAAAABAgMEBQYH/8QANhEAAQMCBAIIBAUFAQAAAAAAAQACAwQRBRIxUSFxE0FhgZGhsdEGFBUiFlJTwfAyM0JD4fH/2gAMAwEAAhEDEQA/AMZUUUUIRRRRQhFFFFCEUUUUIRRRRQhFFFFCEUUUUIRRRRQhFFFFCEUUUUIRRRX3BxnBoQvlFFFCEUUUUIRRRRQhFFFFCEUUUUIRRRRQhFFFFCEUUUUIRRRUlDsV2lpC2YLpSftKGB76QkDVMklZGLvNuajaKnvJK9YyWWkgDJy4K+nSN7GfmWz6nBSZ27qv8/TfqDxUBRUnLsF4ioK3YLu4OakjI91RhBBweBpQQdFPHKyQXYQeSKK77TaJtzS8qIhKgyAV7ysc+z2V2eS17yB4JxP4hQXAJj6qFji1zwDzUJRUjc7Lcrcyl6XHKG1K3QrOeNedotsq6yjHiBBWElZ3lYGP9mi4tdOE8RZ0gcMu64qKnFaVvSVbojJVxxlKwQa+eSt7/wC0/wBQpMzd1F87T/nHiFCUVN+S173inwTiOP0hXm9pu9tAkwHVAdacGjMN0orKc8A8eIURRX7eacZcLbram1jmFDBoZbcedS00grWo4SkDiTTlYuLXX4qYsWnLreHm24scpS4oJC1+anJ+NWnTek2IiUybilL0jmGzxSj9TTH2ewTP1jbI6WyUIeDigBwCU+d3DhVSpqRFG5+wJWDU40M4jpxc7+y8YHybZyAFTb9FdP3W0qSPbzqYZ2CCM2Shy3OKSMjfCiTT4NFedn4lxA6uHgFNLGZf6nHxt6LKzFoSSpti1he6d0hEfewezlVs0vs4n36A5LCI0NKXC3uSGCFK4A5xjlxqv7ZdR6t0NqWZC09eJFuivyVPKDOAcqAUMHGeXDup67KDdV7O7NIvcx+ZcJMcSHnn1ZWd8lQB9QIHdXQYpidRBTMmjsA61us6X0tbzWbBhgc0SPdfUW5JdPbE5Dww6/alf5Rqi682YQLBOaiykN7zrXSIcjqKRzIxg1qelf8AKCZ6G0Qbv0PSiOpxCkZxvZTkDP8AhNZ+E47Vz1TY5XcDfq7FLPTmGMuhcQeZWd07OLjcZqYlhX4ZIcz0bC8JUrAJODy5CqZcIkmBOfgzGVMyY7imnm1c0LScEH1EU7Nk+s9OHXFsfflmAkOEKEogAEpKR5w4czSz2r7h2l6jU2tC0KuLykqQcggqJyD1866+KpkNUYXDhlv33stTDX1JaW1GoVYooqWhaeukyE3LjspU24SE+cMnHo7qvkgaq9JKyIXebDtUTRU2NLXsk4icvxCo652+XbnwzMaLayneA7RQHApkdTDIcrHAnmuWiu212ubcy4IbXSFvG9xxjNd3ktesgeCcxkecKC4BD6qFjsrngHmoSiu+6WifbEIXMZ6MLOE8c5r82y1T7lvmGwpwI+keQHoouLXTunjydJmFt+pcVFTfkte848E4/wBoUDSt7PKJ/qFJmbuovnaf848QoSiuq5QJFvfDEpKUOYzuhWSPXXLTlYa5rxmabhXPZjYhc5weLQdcLqWWEkcN89fvFaqsmzXTsKK2JzK58ndHSLcUQkn0JHKkf8neKly62UFP0pC3O9Of0rSmp5q7dp64TmjhxlhakH8WOHvrifiStnFQynicRfbhqbLnzlmmlkkF8psOyy5kaO0yEbidPwt3s6MmhzR2mVJwvT8Igf8ArIrP0y8XeYpS5N1muLVnKumUPhRHvF4iupejXOW24kgg9Mo8u+o/w/WWv8wb9/uqH1KC9uj9E57/ALN9OToTqYUYwZO6ejW0s7uewjrFZP2k2kQbih9DQbU4pTbqQOSx+v5Vo1ra66EJDllQpQAyQ6Rk0qNTMt3y7JmuNBtHhapJb54zkhPtI9laOBMroC5tVe3Vc3UoraeGZskXbe3XwUrsL0UmfLYjSmt5hAEibnkexH5e2n15F6Sznyeg5H4T+tcey6w+I9MNF5G7Ll4eeyOIB+inuHvJqJ1brcWvXcC3NuDwNnzZvZlfL93gawq+qqcRrXMpnGzQdCRpy3PAdymZkjj6WccXH19lS9ueiIUVAfgREMQZiOjUlA81p0cj38+40iNFNPRNVmM5lC0pWhY7cf8AFbZ1PaWb7YZNtcIw8j5tf3VDik+2srXWxuwNZokrb3HUb7EhPYoA4Purd+HcRNRTmJ5u5vmOr2SSu+XEkf8Ai8G3YbfutAaA0ppuZo+3SpllhvvuIKlOLSck7x486nvIvSn/AI9C/cP6157Nf6DWv+6PxNLjadPvzOtprcGRcEMpDe6Gt7d+gM4xXNxx1NZWyRNlLbEnU780rnxwwNe5l9OobJl+ROlMk+TsLJ4Z3D+tccrZ7pN9JT4sLJ7WnCkikym7ar6ZX7Zdsbo+/wCmm9simXmbpl129LkuOiSpLSn04UUYHuzmpa2jrKGLpenJ7ymwTQ1DsnR+QSO236HatDz7CCXcN+ERnlDzinrSfZj2VStnlpQlg3V5OVqJSznqHWaeXyjHECREG+AURHFLGOrq+BpW6cSlNhghHLoUnvI411+FVMk9Ex79Sq1TO6GGSBh4X8rXIUtBivTZrMOMjfeeWEIHaScU9NFQbLp2f5NRCl+6iKJM14DikE4SD2ZOcD0UtdjzbTmu4pdwShtxSAes7p/LNWPYMqRdb3rfVEreK5l3MZBVzDbQ80dwUB3VhfEErntcy9mtAPMk2HcACVLhFO0sdKddE1aKBzqt6Fu3jNF2ZUvKotxeQB+Aqyk/H2VxrYnOY540bbzWqXgODd0svlIaXcvV5syY6PPmutMAgfa3wkn2L91O2My3HjtR2khDbSAhKRyAAxXHdbWzcJluku4zCfLqeHPzSMe0g91drziGWXHnFbqEJKlHsAFXKmsM9PDD+QHzPtZNjBbmB0vfyC/dVLa5CE3Qk0bu8pkpdA9RwfcTXbs9uSrtpZmc4cuOOulXo+cV+WKlL3F8Os02FjPTsLbHrINRxZqSrGbVrvQpj7TQm3WF/P8AnMmPNfYPNtxSfYa8iSTknNTWt4xjallJxgKIUO8cffmoSvX2m4utank6SJr9wF02yG5PnsxGvpOKxnsHWfZWpdi+ibdKgLn3KE2/DaHQRmnAcEjmr8vbSV2SadfnzGnG28vy1hljhyTnir/fZWwrTBjWi0x4DGEMRmwnJ9HMn41yvxNiJgiEMZs53p/P3WRUOFTU2/xZ5n/ijBovSXH/AKeg8efmn9azjtu0cq2zJUVps/s5L8U/faPV3fEU7dG64F31rcLe6sCK8f2HPVu8x/iHGunbBp/xtp7w9hG9Jg5XjHFTf2h+fdWPhtVU4fWtiqXGzgNSTrp7FVnOa5gngHFp8d/JZY2X8Xpo9DfxNa8Z0XpMsNqOn4JV0Y47p7PXWW9OWzxZfrihCcMO9Gtr0Ak5Hca2Gx/N2/7A+FXviqeSMxmNxF76G2yfG6OoqZHgXBDfRZD15ZnLpc2orGGmW5Dm+r7ic8hTY2SbNY3gTM26RdyCkZYjK4F38avR8asFg2YNxr6q4XeczNZCy4hhCCMqzkb2eYq36r1DbtN20ypigVHzWWE/ScPYB2emosRxx0zW01Gbk9Y9B7qCCB7WDpzZrdB+5UJqe06D0/bVT59igDmGmwk7ziuwcazhtA1XHjzXvF0WPFfd5MMjzGR1d9dO1TaDMuFwcUp4OS1DCUpPmRk9g9NKhxa3HFOOKKlqOSSeJNbuD4Y+mZmmeXOO5JA7B7q3TUYq3CR7bMGgtr2nsX15xx51TrqytajlSieJNfiiit1b4FuATv8Ak6utpvFkWrGUvOIznrIVj41pDVcJ24abuMJkbzrsdaUDtVjgPbWO9lF+FsmpbCwl5p9MhjPJRGMj3VqyzbQNM3CMhb09EJ4jz2nwQQesA8jXD/EtLP8AMsqImk2246G6537Y5pYpDa5uORSLkW64xipD9ultrRzSWVZ+FfWbbcX3EtM2+W4tZAADKuvurRCtS6eI3lXmCRjmXByoOpdPISVeOYKRjiQ4Kb+Iqm39g37/AGVD6ZFf+5/PFURjZEx0DfSXp4Obo3x0QOD11XNA6YTP109FWemhW15SnFkcF7qsJHeR7jTGv20HTdvhuqiz0TpO6ejbZBIKurJ6hUds8uWmrLYh4VfIPh8xfTycr4hR4hPd8c1XZXYiKaR0oJJ4N4eJ06gpXU9MZWhluHE8Vfz6OFUGZsttUyW9KkXaet15ZWtRSniScmq5tY2kKgvJFhu3QxY6N56Qz5wcUeSRnnj4ml3/AC2XL+v7h/BFJh2DYi2PpYXhmbx9FYkeyc2EZeBtotN2mIYFtjwvCHJAYQEBxz6RA5ZpV7b7B4PNav8AHR83I+bkYHJYHA94+FQOzzavLm3hl6fdnZNvK+ifS8kAozyVgdn6009QXrSF5s8m2Sb5BKH0EA7/ANE9SuXUcVFHTVeFVrXvGYHWwJ4HXq702Ux1ERjP2kdR4L32a/0Gtf8AdH4mpaTc7ZHeLMidEadHNC3AFD21V9EagsFu0rBgyr1CQ8wlSFjf6wo+ilBtvvDHj263W2OsyUJDW4scUnzUg1HBhTq6uka67Rcm9u1O+YyRRtZYk2FrrQfjmy/1nA/jJrrdUt6KVQ3mt5Sfm3PpI93MVh2Nq+e/JZZcZjhC3EhRCeIGa0nsb1Pa4OmXoV1useOWnyWUuKI8wgcs9Wc1PiXw46ji6SNxcb6WUxkljeGTAC/alhtxTqJt+5IujqXZYxvrSMJLX4B1DH51VdAXFEq0iGpQ6aNwx1lJ5H8qa23iZa7vLQ5bpkeUFQlNuFs5xxOM+01m62zX7dNRKjK3VoPcR1g12GFuM1GwublNtLW8lXhpBUwywg8Qbg8x1p36fubtmvUW5sjKmHAop+8ORHeMin3oS3W632Iu2wqMefIcnecMEF1RVjuzjurMWnLzFvbaEsHdkkgKZJ459HaK1laowhWuJDTyYZQ2O4AVzXxUA0M3PoP/AFQ4YyWJz43i1l7uKCG1LUcBKSSaR+xXUJG1C52Z1eEz4XhAHatKzw9ij7KcWpHvBtO3KRnHRxXFDuSayXpe+my7crROUvdbS+2w4Ty3XBun2b2e6qWCUnzFHUjcC3MXK0Q3PUtGwJ9FsSq5tLn+L9FXFwKwt1HQp9O8cH3E1Yzz4cqVfyh7smJZYkTe4DfkrHoSMD4n2Vk4VB09ZGztv4cU2qeWwutrp48F7/J0uYuOkrmjez4LdHGUj0BCD8SaZtIL5HM1T1t1JEUrJQ+09+8FAn/TT9qbHI+jr5W9vqAVZ6MRWYOpYx2+WzxfraQAnCelcSn1b2R7lVRbVCcuFwZiNA5cVgnsHWa0J8ofSE2/avajWuOt+bKQhxltGPPON0g55AAZPqqgaN0m/Zr7IhXZxmPJTI8FW6VZQ2AcKOezPwr0KgrWSUrHE/dlBsoGVgp6RwH9TSQP28k7Ngum24sRd5W1uoQnweICOQH0lfl7aZd6g+M7XIgGQ5HS+jcU43jeAPPGe0cKhrTqDR9stseBGvkEMx2wkefzx18uZpQa82sXGFeXX412kRITjhTHabQFZSPtd/PvrizS1mK1jpWjLbS4Pd1d6qseyGMRj7iduJO6Y9v2YWuBOYmRrrPQ8wsLQd1PMVfFAKSUqAUCMEHrrLn8tly/r+4fwhTL2U7R0T+kav8AdUqbeQHY8h3hjtScf751LiWD4iY+lmdny7a+iWJ7ITlMZYDvoqjr+wnT+qHYqEnwZw9LHP4CeXccjurQjH83b/sD4UudqUvTN+sPSRbxCcnQ1b7QSviofaT7OPdVra1bpgMISb7CCujHDf8AR6qgxKSespoSWHMLg8D2ce9R0rY4ZXgOFja3HmqzZtp8Z69rt92htw2d8tofQsqAIOPOzyHpq1ap09bNTW0MS0gnG8xIR9JBPWD1isr69u0m3TGp8XC2VyFhY+ysHiKYuyPai2xGbjSnFv23OCknLkY/mmtOuwF0TW1FFwcOr27ezrTYpnmPNOLsdwvtzVK2qbOJdvnKDjSW5ByWn0j5uQPyNKSSw9GfWw+2ptxBwpKhxFbkvN70RerYqHcLvAejuDhlZBSeog44Gs/bS9IWtc3oYVzjTUFJUxKaOVJx9lY7618HxaSob0c7C1w7DY/zbwVqCr+TOVzs0fPiPcJL0V1XOBKt0pUeU2ULHI9Sh2g1y10K3mua8BzTcFfUkpUFJJBHEEdVTEPU16jJCUzC4kDADgCsVDUUhAOqbJDHKLPaDzVi8sbwUlKvB1AjH1QoVrK8nkY6f8oVXaKTI3ZV/p9L+mPBWFOsb2B9ayfW0K+HWF6JB34+Qc/Uiq/RRkbsj6fS/pjwUrdr/cbnGTHlOI6MK3sIQE5PpqKoopQANFYjiZE3KwWC77PdplqdW5DWkFYwoKTvCpLywvW8Fb7GRw+qFV6igtB1UclJBI7M9gJ5KxeWV7++x/BFc1w1NdJ0NyJIWyWnMb262AeH/FQ1FJkbsmtoaZpBDBcdi/TalIWlaThSSCKn16wvSklJcYwRj6oVXqKUgHVSS08U1jI0G26sB1feSSStjiMH5kVXzxNFFAAGiIqeKG/RtAvsve3zJECcxNiOFt9hwONqHUoHIptWXbvqnDbN1nr7FPNtJ4ekp66T1FV56SCot0rQbbhE0DJRZ3stGt65v2o7c7HiX1ifHeRuuNo3UrAPUUnBz6Bmq1OtwStPhsEoWCCC61unPrNJlta21hba1IUk5CknBFWOz681dakBuJfJRb623iHUn97NV2URgBEIFvD0v6LHnwUvdmZIe/3TtG0LVmMC6nh+AVA6puMzUys3p9Uk9GG/u+bnOOFU2Ntb1CndEu22KaBzLsBIUe8Yrpb2uSkElGktOAn/AOdX61WjpDC7MyAA7i3/ABVnYPWH/Z5lWXR8x7SC5C9PrTDXISlLpAyVAZxz9Zq3wdXa/nOBEN2U+pXLcj5HtxilkNtuoGUAQLFp2KodYghf/wCqjbntk2hzkFtN/XCbPNENtLIPsFRy0cs7i50DL7uN/QfupWYTUk/fKfNP+2w9TN36BqPWlxh21iFkgynUoWUkHIArP2v9bzX9b3p62yYr0Jc10sOJbBC0bxwQfSKplyudxubpduM6TLWTnLzpVx765Ks0WGmCQyPIJtawFgBe/atGHDYWNs/7ufFWDyvvPHz4/EY+pFRl3ucu6yEvzFpUpKd0BIwAPVXFRWoGgaKzHSQROzMYAeSKl7VqK522KI0ZxvowSQFNhRFRFFBAOqkliZK3K8XHarCNYXoEkLY4nP1Qo8sb19+P/BFV6ikyN2Vf6fS/pjwUrdr9cLnFRGlKaLaFBQCWwOOMfnXHbpsmBJEiK4ULHPrB9BHXXNRS2FrKdsEbWZGtFtlYVawvShgrY55+qFHlhet4K32MgY+qFV6ikyN2UH0+l/THgpa63+fc4/QzBHWAcpIaAUn1GomiilAA0ViKJkTcrBYL/9k=" alt="Carmak" />
+        <div class="header-divider"></div>
+        <div class="portal-title">
+          <h2 id="tituloCliente">Olá</h2>
+          <p id="subtituloPortal">Selecione um item para visualizar.</p>
+        </div>
+      </div>
+      <button class="logout-btn" onclick="sair()">Sair</button>
+    </header>
+
+    <div class="portal-body">
+
+
+      <!-- FAVORITOS -->
+      <div class="section-favs" id="secaoFavs" style="display:none">
+        <div class="section-favs-label">⭐ Favoritos</div>
+        <div id="listaFavs" class="dashboard-grid"></div>
+      </div>
+
+      <div class="section-label">
+        <h3>Conteúdo disponível</h3>
+        <span id="contadorDashboards"></span>
+      </div>
+
+      <div id="listaDashboards" class="dashboard-grid"></div>
+
+      <div id="viewer" class="viewer">
+        <div class="viewer-top">
+          <strong id="viewerTitulo">Dashboard</strong>
+          <a id="abrirNovaAba" class="open-new" href="#" target="_blank">Abrir em nova aba ↗</a>
+        </div>
+        <iframe id="iframePowerBI" src=""></iframe>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  // ─── USUÁRIOS ──────────────────────────────────────────────────────────────
+  // Login:  primeiro nome + último sobrenome (sem acentos, minúsculas)
+  // Senha RH:       RHCMK
+  // Senha gestores: 3 primeiros dígitos do CPF
+  //
+  // Para adicionar conteúdo a um gestor, preencha o array "dashboards":
+  // { titulo, descricao, icone, link }
+  // ───────────────────────────────────────────────────────────────────────────
+  // Formulário compartilhado — Pedido de Promoção
+  const FORM_PROMOCAO = {
+    titulo:   "Solicitação de Promoção",
+    descricao: "Formulário de solicitação de promoção para colaboradores da sua equipe.",
+    icone:    "🏅",
+    link:     "https://www.jotform.com/230376797739979"
+  };
+
+  // Plataforma Sólides
+  const SOLIDES = {
+    titulo:   "Plataforma Sólides",
+    descricao: "Abertura de vagas, Gestão Comportamental, Desenvolvimento e Performance.",
+    icone:    "🚀",
+    link:     "https://plataforma.solides.com/home",
+    novaAba:  true
+  };
+
+  // Dashboard Horas Extras
+  const HE = {
+    titulo:   "⚠️ Horas Extras em Tempo Real ⚠️",
+    descricao: "Acompanhamento em tempo real das horas extras da sua equipe.",
+    icone:    "⏱️",
+    link:     "https://victoriajardim07-pixel.github.io/control/dashboard.html",
+    novaAba:  true
+  };
+
+  // BI Individual — RH / Alex / Diretoria
+  const BI_FOLHA_ALEX = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiNTI4MzY1Y2ItOTg3MC00YjVkLWI0YTEtMGQzZjM5NDQ0YjUyIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+
+  // BI Folha de Pagamento — individual por gestor
+  const BI_FOLHA_BRUNO = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiNDk5YjUxMDYtMTYwZC00NjlmLTlmNWEtMjk5NTY0MzMyNGVjIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+
+  // BI Folha de Pagamento — gestores adicionais
+  const BI_FOLHA_ADRIANOCHAGAS = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiOTM1NDIzN2MtM2U0OS00ZGUyLTgyOTktODczMDQ4MjE1OTI1IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_DANIELSILVA = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiNzA3ZjNiY2MtYzIwMy00ODVmLTgzNTctZTI5YWNkZmM2ODYwIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_MARCELOSANTOS = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiMTg4MjNmMTktOTVhYy00MGFhLTk0YTEtODIzNzU4ZWU2NzU0IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_RONALDOSANTOS = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiNjM4NzE5MTUtMDNlZi00OTFhLTkxZGMtMzZiMzRlMzk5Mzk5IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_JARDELPEREIRA = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiZDJmNzc3YWItMGU5NS00N2JkLTljYWUtY2Y4ZDFkNzNmN2Q2IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_LUCASBIANCHI = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiZWJiMTA0NzMtZDdkYy00NmFlLWE5MjgtNDU1NjlkYjkzOWVkIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_JANDERSONCOSTA = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiMzU3M2RlMTgtOTFiOS00YWU5LWIwZWMtNGUyYjI1MzZlODg5IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_MARCELOJUNIOR = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiYjIyMGE1NTUtMzhjYy00OGYwLWFkMTMtNmFlNjk5ZDNjMzYxIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_KERLERIOS = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiNGU1NDBiNTAtMzJjMy00YWYxLTlkYTUtZmUzYjBlNzdlNjA5IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_JULIOCORREA = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiZGY1MDVkYjUtZmQ1ZS00NTMzLThkM2UtNDlkOGQzNTljOGZiIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_JAIDANSOUZA = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiZTQyY2I0NjMtM2I1Ny00NzdlLWIyMjYtYTFiMzhiNWM0Mjk0IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+
+  // BI Folha de Pagamento — gestores (lote 2)
+  const BI_FOLHA_GIACOMOBOTENE = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiNWM4NzczNTYtYzM5ZS00MzFkLTkxNDktMzgxOTA3ODlmMDUzIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_JEFERSONRUAS = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiZTEzNjRjY2QtMzQ5Ni00Zjc4LWJiYjMtMTA5YjFhYzcxMTk1IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_LEONARDOCASTRO = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiYWI0YTcyNjctNTNlZC00M2ZhLWIwMGUtNWRiZTY3OGMxZjYwIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_LUCASWASZAK = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiMjhkNTQxODUtODA4YS00ZWY0LTliYTAtYTRhOWZkNmYxMWNjIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_LUCASVERNEQUE = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiZjhhNjNjNTEtODAwZi00MGI4LWI5MzAtMzAzODViNGJlNzY3IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_LUISSILVA = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiNWIwYzRmNjItNzdiNy00MWJjLTlkMTQtNzZmYWE3MjU5YThjIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+  const BI_FOLHA_MARLONKRAMER = {
+    titulo:   "BI Folha de Pagamento",
+    descricao: "",
+    icone:    "💵",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiNjI1MjA5YjctOTk0OS00NTZjLTgwNTQtYjBjNmZiMjhiNGNlIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+
+  // Dashboard Cursos Obrigatórios
+  const BI_CURSOS = {
+    titulo:   "Acompanhamento de Cursos Obrigatórios",
+    descricao: "Acompanhe o andamento dos cursos obrigatórios da sua equipe.",
+    icone:    "📚",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiODk2ZjE0N2QtMTViNC00NDlkLTg5OGUtOGM5YjgzZWNlMTYxIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
+  };
+
+  // Dashboard compartilhado — gestor filtra pelo próprio nome dentro do BI
+  const BI_FERIAS = {
+    titulo:   "Férias, ASOs e Contratos de Experiência",
+    descricao: "Férias, Vencimentos dos ASOs e Contratos de Experiências da sua equipe.",
+    icone:    "📅",
+    link:     "https://app.powerbi.com/view?r=eyJrIjoiZDRkYjNkNTUtZmMxNy00YzAyLWE4NzgtMGJlNDJhZGUyYzk3IiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9&pageName=c3480abf116674ba55bc"
+  };
+
+  const usuarios = {
+    "rh":               { senha:"RHCMK",     nome:"Gestão RH",   isRH:true,  dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ALEX] },
+    "diretoria":        { senha:"Carmak@26", nome:"Diretoria",   isRH:true,  dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ALEX] },
+    "brunoroos":        { senha:"032",   nome:"Bruno Roos",          isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_BRUNO] },
+    "carlasantos":      { senha:"108",   nome:"Carla Santos",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
+    "danielsilva":      { senha:"037",   nome:"Daniel Silva",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_DANIELSILVA] },
+    "danilocatini":     { senha:"360",   nome:"Danilo Catini",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
+    "davidmaximo":      { senha:"374",   nome:"David Maximo",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
+    "edesjunior":       { senha:"030",   nome:"Edes Junior",         isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
+    "giacomobotene":    { senha:"832",   nome:"Giacomo Botene",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_GIACOMOBOTENE] },
+    "guilhermesantos":  { senha:"029",   nome:"Guilherme Santos",    isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
+    "jaidansouza":      { senha:"050",   nome:"Jaidan Souza",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JAIDANSOUZA] },
+    "jandersoncosta":   { senha:"959",   nome:"Janderson Costa",     isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JANDERSONCOSTA] },
+    "jardelpereira":    { senha:"044",   nome:"Jardel Pereira",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JARDELPEREIRA] },
+    "jefersonruas":     { senha:"008",   nome:"Jeferson Ruas",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JEFERSONRUAS] },
+    "juliocorrea":      { senha:"001",   nome:"Julio Correa",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JULIOCORREA] },
+    "kerlerios":        { senha:"827",   nome:"Kerle Rios",          isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_KERLERIOS] },
+    "leonardocastro":   { senha:"044",   nome:"Leonardo Castro",     isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LEONARDOCASTRO] },
+    "lucasbianchi":     { senha:"032",   nome:"Lucas Bianchi",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUCASBIANCHI] },
+    "lucasverneque":    { senha:"015",   nome:"Lucas Verneque",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUCASVERNEQUE] },
+    "lucaswaszak":      { senha:"032",   nome:"Lucas Waszak",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUCASWASZAK] },
+    "luissilva":        { senha:"078",   nome:"Luis Silva",          isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUISSILVA] },
+    "marcelosantos":    { senha:"007",   nome:"Marcelo Santos",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_MARCELOSANTOS] },
+    "marcelojunior":    { senha:"026",   nome:"Marcelo Junior",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_MARCELOJUNIOR] },
+    "marlonkramer":     { senha:"080",   nome:"Marlon Kramer",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_MARLONKRAMER] },
+    "rodrigofortunato": { senha:"341",   nome:"Rodrigo Fortunato",   isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
+    "ronaldosantos":    { senha:"042",   nome:"Ronaldo Santos",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_RONALDOSANTOS] },
+    "sandranedel":      { senha:"719",   nome:"Sandra Nedel",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
+    "adrianochagas":    { senha:"991",   nome:"Adriano Chagas",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ADRIANOCHAGAS] },
+    "alexsantos":       { senha:"019",   nome:"Alex Santos",         isRH:true,  dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ALEX] },
+    "gabrielschmeling": { senha:"043",   nome:"Gabriel Schmeling",   isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] }
+  };
+
+  // ── DATA DE ADIÇÃO DOS CARDS (para badge "Novo" — 7 dias) ──
+  // Formato: "YYYY-MM-DD"  ← atualize sempre que adicionar um card novo
+  const DATA_ADICAO = {
+    "Férias, ASOs e Contratos de Experiência":   "2026-06-09",
+    "Solicitação de Promoção":                    "2026-06-09",
+    "Plataforma Sólides":                         "2026-06-09",
+    "⚠️ Horas Extras em Tempo Real ⚠️":          "2026-06-16",
+    "Acompanhamento de Cursos Obrigatórios":      "2026-06-16"
+  };
+
+  // ── INDICADORES RH (atualize mensalmente ou conecte a uma planilha) ──
+  // Indicadores RH — gestores ativos contados automaticamente pelo sistema
+  const RH_INDICADORES = { atualizadoEm: null };
+
+  let usuarioAtual = null;
+  let favoritosAtual = {};   // { loginAtual: Set(titulos) }
+
+  function carregarFavs(login) {
+    try {
+      const raw = localStorage.getItem("favs_" + login);
+      return raw ? new Set(JSON.parse(raw)) : new Set();
+    } catch { return new Set(); }
+  }
+
+  function salvarFavs(login, set) {
+    try { localStorage.setItem("favs_" + login, JSON.stringify([...set])); } catch {}
+  }
+
+  function isNovo(titulo) {
+    const data = DATA_ADICAO[titulo];
+    if (!data) return false;
+    const diff = (Date.now() - new Date(data).getTime()) / (1000*60*60*24);
+    return diff <= 7;
+  }
+
+  function normalizar(t) {
+    return t.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");
+  }
+
+  function entrar() {
+    const login  = normalizar(document.getElementById("login").value);
+    const senha  = document.getElementById("senha").value.trim();
+    const erro   = document.getElementById("erro");
+    erro.innerText = "";
+
+    const usuario = usuarios[login];
+    if (!usuario || usuario.senha !== senha) {
+      erro.innerText = "Login ou senha incorretos.";
+      return;
+    }
+
+    usuarioAtual = usuario;
+    document.getElementById("areaLogin").style.display   = "none";
+    document.getElementById("areaCliente").style.display = "block";
+
+    const badge = usuario.isRH ? '<span class="badge-rh">RH</span>' : "";
+    document.getElementById("tituloCliente").innerHTML = "Olá, " + usuario.nome + badge;
+
+    const total = usuario.dashboards.length;
+    document.getElementById("contadorDashboards").innerText =
+      total > 0 ? total + " item(s) disponível(is)" : "";
+    document.getElementById("subtituloPortal").innerText =
+      total > 0 ? "Selecione um item abaixo para visualizar."
+                : "Seus painéis serão disponibilizados em breve.";
+
+    favoritosAtual = carregarFavs(login);
+
+    montarDashboards(usuario);
+  }
+
+  function criarCard(d, index, origem) {
+    const card = document.createElement("div");
+    card.className = "dashboard-card";
+    card.style.paddingTop = "14px";
+
+    const isFav = favoritosAtual.has(d.titulo);
+    const novo  = isNovo(d.titulo);
+
+    card.innerHTML = `
+      <button class="fav-btn ${isFav ? "ativo" : ""}" title="${isFav ? "Remover dos favoritos" : "Adicionar aos favoritos"}">⭐</button>
+      <div class="dashboard-icon">${d.icone || "📊"}</div>
+      <h4>${d.titulo}${novo ? '<span class="badge-novo">NOVO</span>' : ""}</h4>
+      <p>${d.descricao || "Clique para abrir."}</p>
+      ${d.novaAba ? '<span style="font-size:11px;color:#5cb800;margin-top:8px;display:block;">↗ Abre em nova aba</span>' : ""}`;
+
+    // clique no card (exceto no botão fav)
+    card.addEventListener("click", (e) => {
+      if (e.target.closest(".fav-btn")) return;
+      abrirDashboard(index, card, origem);
+    });
+
+    // clique no favorito
+    card.querySelector(".fav-btn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleFav(d.titulo);
+    });
+
+    return card;
+  }
+
+  function montarDashboards(usuario) {
+    const lista    = document.getElementById("listaDashboards");
+    const listaFav = document.getElementById("listaFavs");
+    const secaoFav = document.getElementById("secaoFavs");
+
+    lista.innerHTML    = "";
+    listaFav.innerHTML = "";
+
+    if (!usuario.dashboards.length) {
+      lista.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">📋</div>
+          <h4>Nenhum painel configurado ainda</h4>
+          <p>Os dashboards e formulários da sua equipe<br>serão adicionados em breve pelo RH.</p>
+        </div>`;
+      secaoFav.style.display = "none";
+      return;
+    }
+
+    const favs = [...favoritosAtual];
+    const temFavs = favs.some(t => usuario.dashboards.find(d => d.titulo === t));
+    secaoFav.style.display = temFavs ? "block" : "none";
+
+    usuario.dashboards.forEach((d, i) => {
+      // card principal
+      lista.appendChild(criarCard(d, i, "lista"));
+
+      // card favorito (cópia)
+      if (favoritosAtual.has(d.titulo)) {
+        listaFav.appendChild(criarCard(d, i, "fav"));
+      }
+    });
+  }
+
+  function toggleFav(titulo) {
+    const login = Object.keys(usuarios).find(k => usuarios[k] === usuarioAtual);
+    if (favoritosAtual.has(titulo)) {
+      favoritosAtual.delete(titulo);
+    } else {
+      favoritosAtual.add(titulo);
+    }
+    salvarFavs(login, favoritosAtual);
+    montarDashboards(usuarioAtual);
+  }
+
+  // ── LINK DA PLANILHA QUADRO DE LOTAÇÃO ──
+  const SHEET_LOTACAO = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTuJnYDkeaeNR-jfJbKR1DwNDyXrfM6mrFUtvPA76518KFA1g0DA0MXcr-fX0FbeANUB7yJ1wfSmbg4/pub?gid=1565595325&single=true&output=csv";
+
+  async function montarPainelRH() {
+    const totalGestores = Object.keys(usuarios).filter(k => !usuarios[k].isRH).length;
+    const kpisEl   = document.getElementById("rhKpis");
+    const statusEl = document.getElementById("rhStatus");
+    const chartEl  = document.getElementById("rhChartBars");
+
+    // KPI gestores (imediato)
+    kpisEl.innerHTML = `
+      <div class="rh-kpi">
+        <div class="kpi-icon">👥</div>
+        <div class="kpi-valor">${totalGestores}</div>
+        <div class="kpi-label">Gestores<br>Ativos</div>
+      </div>
+      <div class="rh-kpi loading" id="kpiAtivos">
+        <div class="kpi-icon">🏢</div>
+        <div class="kpi-valor">...</div>
+        <div class="kpi-label">Colaboradores<br>Ativos</div>
+      </div>
+      <div class="rh-kpi loading" id="kpiAdmitidos">
+        <div class="kpi-icon">✅</div>
+        <div class="kpi-valor">...</div>
+        <div class="kpi-label">Admitidos<br>no Mês</div>
+      </div>
+      <div class="rh-kpi loading" id="kpiDemitidos">
+        <div class="kpi-icon">🔄</div>
+        <div class="kpi-valor">...</div>
+        <div class="kpi-label">Demitidos<br>no Mês</div>
+      </div>
+      <div class="rh-kpi loading" id="kpiFerias">
+        <div class="kpi-icon">🏖️</div>
+        <div class="kpi-valor">...</div>
+        <div class="kpi-label">Em<br>Férias</div>
+      </div>`;
+
+    // Buscar planilha
+    try {
+      const res  = await fetch(SHEET_LOTACAO);
+      const text = await res.text();
+      const rows = text.trim().split("\n").map(r => r.split(",").map(c => c.replace(/^"|"$/g,"").trim()));
+
+      // Encontrar linha de cabeçalho com meses
+      const headerRow = rows[0];
+      const meses = ["JAN","FEV","MAR","ABR","MAI","JUN","JUL","AGO","SET","OUT","NOV","DEZ"];
+
+      // Achar último mês com dado
+      let lastColIdx = -1;
+      let lastMes = "";
+      for (let i = headerRow.length - 1; i >= 1; i--) {
+        const h = headerRow[i].toUpperCase().trim();
+        if (meses.some(m => h.includes(m))) {
+          // Checar se alguma row tem valor nessa coluna
+          const temDado = rows.slice(1).some(r => r[i] && r[i].trim() !== "" && !isNaN(r[i].replace(/\./g,"").replace(",",".")));
+          if (temDado) { lastColIdx = i; lastMes = headerRow[i]; break; }
+        }
+      }
+
+      // Helper: achar linha por keyword
+      function findRow(keyword) {
+        return rows.find(r => r[0] && r[0].toUpperCase().includes(keyword.toUpperCase()));
+      }
+
+      function getVal(row, col) {
+        if (!row || col < 0) return "—";
+        const v = row[col];
+        return (v && v.trim() !== "") ? parseInt(v) || v : "—";
+      }
+
+      const rowAtivos    = findRow("COLAB ATIVOS");
+      const rowAdmitidos = findRow("ADMITIDOS");
+      const rowDemitidos = findRow("DEMITIDOS");
+      const rowFerias    = findRow("FÉRIAS") || findRow("FERIAS");
+
+      const vAtivos    = getVal(rowAtivos,    lastColIdx);
+      const vAdmitidos = getVal(rowAdmitidos, lastColIdx);
+      const vDemitidos = getVal(rowDemitidos, lastColIdx);
+      const vFerias    = getVal(rowFerias,    lastColIdx);
+
+      // Atualizar KPIs
+      function setKpi(id, val) {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.remove("loading");
+          el.querySelector(".kpi-valor").innerText = val;
+        }
+      }
+      setKpi("kpiAtivos",    vAtivos);
+      setKpi("kpiAdmitidos", vAdmitidos);
+      setKpi("kpiDemitidos", vDemitidos);
+      setKpi("kpiFerias",    vFerias);
+
+      // ── GRÁFICO: últimos 6 meses ──
+      // Coletar colunas dos últimos 6 meses com dados
+      const colsCandidatas = [];
+      for (let i = 1; i < headerRow.length; i++) {
+        const h = headerRow[i].toUpperCase().trim();
+        if (meses.some(m => h.includes(m))) {
+          const temDado = rows.slice(1).some(r => r[i] && r[i].trim() !== "" && !isNaN(r[i]));
+          if (temDado) colsCandidatas.push({ col: i, label: headerRow[i] });
+        }
+      }
+      const ultimas6 = colsCandidatas.slice(-6);
+
+      const maxAtivos = Math.max(...ultimas6.map(c => parseInt(getVal(rowAtivos, c.col)) || 0));
+
+      chartEl.innerHTML = "";
+      ultimas6.forEach(c => {
+        const a = parseInt(getVal(rowAtivos,    c.col)) || 0;
+        const ad = parseInt(getVal(rowAdmitidos, c.col)) || 0;
+        const d  = parseInt(getVal(rowDemitidos, c.col)) || 0;
+        const maxVal = Math.max(a, 1);
+        const pct = v => Math.max(4, Math.round((v / maxAtivos) * 100));
+
+        const group = document.createElement("div");
+        group.className = "rh-bar-group";
+        group.innerHTML = `
+          <div class="rh-bar-val">${a}</div>
+          <div style="width:100%;display:flex;gap:2px;align-items:flex-end;height:90px;">
+            <div class="rh-bar ativos"    style="height:${pct(a)}%;flex:3" title="Ativos: ${a}"></div>
+            <div class="rh-bar admitidos" style="height:${pct(ad)}%;flex:2" title="Admitidos: ${ad}"></div>
+            <div class="rh-bar demitidos" style="height:${pct(d)}%;flex:2" title="Demitidos: ${d}"></div>
+          </div>
+          <div class="rh-bar-label">${c.label}</div>`;
+        chartEl.appendChild(group);
+      });
+
+      statusEl.innerHTML = '<span class="dot"></span><span>Atualizado em tempo real</span>';
+      document.getElementById("rhAtualizado").innerText =
+        "Fonte: Quadro de Lotação • Mês atual: " + lastMes;
+
+    } catch(e) {
+      statusEl.innerHTML = '<span style="color:#fca5a5">⚠ Erro ao carregar planilha</span>';
+      ["kpiAtivos","kpiAdmitidos","kpiDemitidos","kpiFerias"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.classList.remove("loading"); el.querySelector(".kpi-valor").innerText = "—"; }
+      });
+      document.getElementById("rhAtualizado").innerText = "Não foi possível conectar à planilha.";
+    }
+  }
+
+  function abrirDashboard(index, card, origem) {
+    const d = usuarioAtual.dashboards[index];
+
+    if (d.novaAba) {
+      window.open(d.link, "_blank");
+      return;
+    }
+
+    document.querySelectorAll(".dashboard-card").forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
+    document.getElementById("viewer").style.display   = "block";
+    document.getElementById("viewerTitulo").innerText = d.titulo;
+    document.getElementById("abrirNovaAba").href      = d.link;
+    document.getElementById("iframePowerBI").src      = d.link;
+    document.getElementById("viewer").scrollIntoView({ behavior:"smooth", block:"start" });
+  }
+
+  function sair() {
+    usuarioAtual    = null;
+    favoritosAtual  = {};
+    ["login","senha"].forEach(id => document.getElementById(id).value = "");
+    document.getElementById("erro").innerText              = "";
+    document.getElementById("listaDashboards").innerHTML   = "";
+    document.getElementById("listaFavs").innerHTML         = "";
+    document.getElementById("secaoFavs").style.display    = "none";
+    document.getElementById("iframePowerBI").src           = "";
+    document.getElementById("viewer").style.display        = "none";
+    document.getElementById("areaCliente").style.display   = "none";
+    document.getElementById("areaLogin").style.display     = "block";
+  }
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Enter" && document.getElementById("areaLogin").style.display !== "none") entrar();
+  });
+</script>
+</body>
+</html>
