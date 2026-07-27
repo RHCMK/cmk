@@ -758,6 +758,15 @@
     link:     "https://app.powerbi.com/view?r=eyJrIjoiNDk5YjUxMDYtMTYwZC00NjlmLTlmNWEtMjk5NTY0MzMyNGVjIiwidCI6ImUxNTNiNmQxLWQ2ZDMtNDg5OS1iMmFhLTQyNzRlODAzMjdlOSJ9"
   };
 
+  // Solicitação de Provas Técnicas
+  const PROVAS_TECNICAS = {
+    titulo:   "Solicitação de Provas Técnicas",
+    descricao: "",
+    icone:    "📝",
+    link:     "https://sites.google.com/view/solicitprovastecnicascarmak/solicita%C3%A7%C3%A3o-de-prova-t%C3%A9cnica",
+    novaAba:  true
+  };
+
   // BI Folha de Pagamento — gestores adicionais
   const BI_FOLHA_ADRIANOCHAGAS = {
     titulo:   "BI Folha de Pagamento",
@@ -887,36 +896,36 @@
   };
 
   const usuarios = {
-    "rh":               { senha:"RHCMK",     nome:"Gestão RH",   isRH:true,  dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ALEX] },
-    "diretoria":        { senha:"Carmak@26", nome:"Diretoria",   isRH:true,  dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ALEX] },
-    "brunoroos":        { senha:"032",   nome:"Bruno Roos",          isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_BRUNO] },
-    "carlasantos":      { senha:"108",   nome:"Carla Santos",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
-    "danielsilva":      { senha:"037",   nome:"Daniel Silva",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_DANIELSILVA] },
-    "danilocatini":     { senha:"360",   nome:"Danilo Catini",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
-    "davidmaximo":      { senha:"374",   nome:"David Maximo",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
-    "edesjunior":       { senha:"030",   nome:"Edes Junior",         isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
-    "giacomobotene":    { senha:"832",   nome:"Giacomo Botene",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_GIACOMOBOTENE] },
-    "guilhermesantos":  { senha:"029",   nome:"Guilherme Santos",    isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
-    "jaidansouza":      { senha:"050",   nome:"Jaidan Souza",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JAIDANSOUZA] },
-    "jandersoncosta":   { senha:"959",   nome:"Janderson Costa",     isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JANDERSONCOSTA] },
-    "jardelpereira":    { senha:"044",   nome:"Jardel Pereira",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JARDELPEREIRA] },
-    "jefersonruas":     { senha:"008",   nome:"Jeferson Ruas",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JEFERSONRUAS] },
-    "juliocorrea":      { senha:"001",   nome:"Julio Correa",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JULIOCORREA] },
-    "kerlerios":        { senha:"827",   nome:"Kerle Rios",          isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_KERLERIOS] },
-    "leonardocastro":   { senha:"044",   nome:"Leonardo Castro",     isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LEONARDOCASTRO] },
-    "lucasbianchi":     { senha:"032",   nome:"Lucas Bianchi",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUCASBIANCHI] },
-    "lucasverneque":    { senha:"015",   nome:"Lucas Verneque",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUCASVERNEQUE] },
-    "lucaswaszak":      { senha:"032",   nome:"Lucas Waszak",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUCASWASZAK] },
-    "luissilva":        { senha:"078",   nome:"Luis Silva",          isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUISSILVA] },
-    "marcelosantos":    { senha:"007",   nome:"Marcelo Santos",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_MARCELOSANTOS] },
-    "marcelojunior":    { senha:"026",   nome:"Marcelo Junior",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_MARCELOJUNIOR] },
-    "marlonkramer":     { senha:"080",   nome:"Marlon Kramer",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_MARLONKRAMER] },
-    "rodrigofortunato": { senha:"341",   nome:"Rodrigo Fortunato",   isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
-    "ronaldosantos":    { senha:"042",   nome:"Ronaldo Santos",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_RONALDOSANTOS] },
-    "sandranedel":      { senha:"719",   nome:"Sandra Nedel",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] },
-    "adrianochagas":    { senha:"991",   nome:"Adriano Chagas",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ADRIANOCHAGAS] },
-    "alexsantos":       { senha:"019",   nome:"Alex Santos",         isRH:true,  dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ALEX] },
-    "gabrielschmeling": { senha:"043",   nome:"Gabriel Schmeling",   isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS] }
+    "rh":               { senha:"RHCMK",     nome:"Gestão RH",   isRH:true,  dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ALEX, PROVAS_TECNICAS] },
+    "diretoria":        { senha:"Carmak@26", nome:"Diretoria",   isRH:true,  dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ALEX, PROVAS_TECNICAS] },
+    "brunoroos":        { senha:"032",   nome:"Bruno Roos",          isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_BRUNO, PROVAS_TECNICAS] },
+    "carlasantos":      { senha:"108",   nome:"Carla Santos",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, PROVAS_TECNICAS] },
+    "danielsilva":      { senha:"037",   nome:"Daniel Silva",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_DANIELSILVA, PROVAS_TECNICAS] },
+    "danilocatini":     { senha:"360",   nome:"Danilo Catini",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, PROVAS_TECNICAS] },
+    "davidmaximo":      { senha:"374",   nome:"David Maximo",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, PROVAS_TECNICAS] },
+    "edesjunior":       { senha:"030",   nome:"Edes Junior",         isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, PROVAS_TECNICAS] },
+    "giacomobotene":    { senha:"832",   nome:"Giacomo Botene",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_GIACOMOBOTENE, PROVAS_TECNICAS] },
+    "guilhermesantos":  { senha:"029",   nome:"Guilherme Santos",    isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, PROVAS_TECNICAS] },
+    "jaidansouza":      { senha:"050",   nome:"Jaidan Souza",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JAIDANSOUZA, PROVAS_TECNICAS] },
+    "jandersoncosta":   { senha:"959",   nome:"Janderson Costa",     isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JANDERSONCOSTA, PROVAS_TECNICAS] },
+    "jardelpereira":    { senha:"044",   nome:"Jardel Pereira",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JARDELPEREIRA, PROVAS_TECNICAS] },
+    "jefersonruas":     { senha:"008",   nome:"Jeferson Ruas",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JEFERSONRUAS, PROVAS_TECNICAS] },
+    "juliocorrea":      { senha:"001",   nome:"Julio Correa",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_JULIOCORREA, PROVAS_TECNICAS] },
+    "kerlerios":        { senha:"827",   nome:"Kerle Rios",          isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_KERLERIOS, PROVAS_TECNICAS] },
+    "leonardocastro":   { senha:"044",   nome:"Leonardo Castro",     isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LEONARDOCASTRO, PROVAS_TECNICAS] },
+    "lucasbianchi":     { senha:"032",   nome:"Lucas Bianchi",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUCASBIANCHI, PROVAS_TECNICAS] },
+    "lucasverneque":    { senha:"015",   nome:"Lucas Verneque",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUCASVERNEQUE, PROVAS_TECNICAS] },
+    "lucaswaszak":      { senha:"032",   nome:"Lucas Waszak",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUCASWASZAK, PROVAS_TECNICAS] },
+    "luissilva":        { senha:"078",   nome:"Luis Silva",          isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_LUISSILVA, PROVAS_TECNICAS] },
+    "marcelosantos":    { senha:"007",   nome:"Marcelo Santos",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_MARCELOSANTOS, PROVAS_TECNICAS] },
+    "marcelojunior":    { senha:"026",   nome:"Marcelo Junior",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_MARCELOJUNIOR, PROVAS_TECNICAS] },
+    "marlonkramer":     { senha:"080",   nome:"Marlon Kramer",       isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_MARLONKRAMER, PROVAS_TECNICAS] },
+    "rodrigofortunato": { senha:"341",   nome:"Rodrigo Fortunato",   isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, PROVAS_TECNICAS] },
+    "ronaldosantos":    { senha:"042",   nome:"Ronaldo Santos",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_RONALDOSANTOS, PROVAS_TECNICAS] },
+    "sandranedel":      { senha:"719",   nome:"Sandra Nedel",        isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, PROVAS_TECNICAS] },
+    "adrianochagas":    { senha:"991",   nome:"Adriano Chagas",      isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ADRIANOCHAGAS, PROVAS_TECNICAS] },
+    "alexsantos":       { senha:"019",   nome:"Alex Santos",         isRH:true,  dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, BI_FOLHA_ALEX, PROVAS_TECNICAS] },
+    "gabrielschmeling": { senha:"043",   nome:"Gabriel Schmeling",   isRH:false, dashboards:[BI_FERIAS, FORM_PROMOCAO, SOLIDES, HE, BI_CURSOS, PROVAS_TECNICAS] }
   };
 
   // ── DATA DE ADIÇÃO DOS CARDS (para badge "Novo" — 7 dias) ──
